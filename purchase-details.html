@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/purchase-details.css">
+    <title>Purchase Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("YOUR_USER_ID"); // Replace "YOUR_USER_ID" with your EmailJS user ID
+        })();
+    </script>
+</head>
+<body>
+  <nav>
+    <div class="logo">Travel</div>
+    <div class="back">
+        <a id="back" href="travel.html">Home</a>
+    </div>
+  </nav>
+   <div class="container">
+        <!-- Tour Image Section -->
+        <div class="tour-image">
+            <img id="productImage" alt="Product Image" style="max-width: 300px;">
+            <h2 id="productName">Product Name</h2>
+            <h4 id="productSubtitle">Product Location</h4>
+        </div>
+        
+        <section class="comments-section">
+            <h2>Leave a Comment</h2>
+            <input type="text" id="commentInput" placeholder="Write your comment here..." />
+            <button id="submitComment">Submit</button>
+            <div id="commentsContainer"></div> <!-- This is where comments will be displayed -->
+        </section>
+        
+        
+        <!-- Booking Section -->
+        <div class="booking-section">
+            <h3 id="productPrice">$99 per person</h3> <!-- Dynamic price will be updated here -->
+            <p><strong>Total:</strong> <span id="totalPrice">$109</span> (including service charge)</p>
+            
+            <!-- Form Section -->
+            <form class="booking-form" id="bookingForm" action="https://formspree.io/f/xqazreov" method="POST">
+                <input type="hidden" id="hiddenProductName" name="productName"> <!-- Hidden input for product name -->
+                
+                <label for="fullName">Full name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter full name" required>
+                
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
+                
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+                
+                <label for="guests">Guests</label>
+                <input type="number" id="guests" name="guests" min="1" placeholder="Number of guests" required>
+                
+                <p><strong>Payable Amount:</strong> <span id="payableAmount">$0.00</span></p> <!-- Payable amount display -->
+                
+                <button id="payButton" type="submit">Book Now</button>
+            </form>
+            
+            <!-- Rating Section -->
+            <div class="rating">
+                <span>⭐ 4.5 (2 reviews)</span>
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+
+
+
+        let basePrice;  // Declare basePrice globally
+    
+        // Retrieve the product details from localStorage
+        const selectedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
+    
+        if (selectedProduct) {
+            // Set product details in the page
+            document.getElementById('productName').textContent = selectedProduct.name;
+            document.getElementById('productSubtitle').textContent = selectedProduct.subtitle; // Display subtitle/location
+            document.getElementById('productPrice').textContent = selectedProduct.price + ' per person'; // Display price
+            document.getElementById('productImage').src = selectedProduct.image; // Display image
+            
+            // Calculate the total price (example: adding a fixed service charge of $10)
+            basePrice = parseFloat(selectedProduct.price.replace('$', '')); // Now basePrice is accessible globally
+            const totalPrice = basePrice + 10; // Add service charge (example)
+            document.getElementById('totalPrice').textContent = '$' + totalPrice.toFixed(2); // Display total price
+        }
+    
+    
+      // Wait for the DOM to fully load before attaching event listeners
+document.addEventListener('DOMContentLoaded', function() {
+
+// Function to load comments from local storage
+function loadComments() {
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    const commentsContainer = document.getElementById('commentsContainer');
+    commentsContainer.innerHTML = ''; // Clear existing comments
+
+    comments.forEach(comment => {
+        const commentDiv = document.createElement('div');
+        commentDiv.className = 'comment';
+
+        // Create an icon element
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-user'; // Change this to any icon you prefer
+        icon.style.marginRight = '10px'; // Add some spacing
+
+        // Create a text node for the comment
+        const commentText = document.createTextNode(comment);
+
+        // Append the icon and text to the commentDiv
+        commentDiv.appendChild(icon);
+        commentDiv.appendChild(commentText);
+        commentsContainer.appendChild(commentDiv);
+    });
+}
+
+// Function to save a new comment
+function saveComment() {
+    const commentInput = document.getElementById('commentInput');
+    const newComment = commentInput.value;
+
+    if (newComment) {
+        const comments = JSON.parse(localStorage.getItem('comments')) || [];
+        comments.push(newComment);
+        localStorage.setItem('comments', JSON.stringify(comments));
+
+        commentInput.value = ''; // Clear the input field
+        loadComments(); // Reload comments
+    }
+}
+
+// Attach event listener to the submit button
+const submitButton = document.getElementById('submitComment');
+submitButton.addEventListener('click', saveComment);
+
+// Load comments when the page loads
+loadComments();
+});
+
+    
+        if (selectedProduct) {
+    document.getElementById('hiddenProductName').value = selectedProduct.name; // Populate the hidden input with the product name
+
+    const guestsInput = document.getElementById('guests');
+    const payableAmountDisplay = document.getElementById('payableAmount');
+
+    guestsInput.addEventListener('input', function() {
+        const numberOfGuests = parseInt(guestsInput.value) || 1; // Default to 1 if input is empty or invalid
+        const payableAmount = basePrice * numberOfGuests; // Calculate total amount based on number of guests
+        payableAmountDisplay.textContent = '$' + payableAmount.toFixed(2); // Update payable amount display
+    });
+}
+
+    </script>
+    
+
+</body>
+</html>

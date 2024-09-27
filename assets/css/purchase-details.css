@@ -1,0 +1,209 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow: hidden;
+}
+#productName{
+    margin-left: 0px;
+}
+.tour-image {
+    position: relative; /* Allows for better control of positioning */
+   
+    
+}
+
+.tour-image img {
+    width: 100%; /* Full width of the container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 20px;
+    display: block; /* Remove any inline space */
+}
+#productName{
+    color: white;
+}
+.tour-image h2,
+.tour-image h4 {
+    text-align: center;
+    padding: 10px;
+    background-color: white; /* White background for titles */
+    margin: 0px; /* Remove default margin */
+    position: absolute; /* Position titles over the image */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%; /* Slightly reduce width for better appearance */
+    z-index: 1; /* Bring text in front of image */
+}
+
+.tour-image h2 {
+    font-size: 24px;
+}
+
+.tour-image h4 {
+    font-size: 20px;
+    color: #333; /* Subtitle color */
+}
+
+.booking-section {
+    padding: 20px;
+}
+
+.booking-section h3 {
+    font-size: 24px;
+    color: rgba(49, 139, 224, 0.726);
+}
+
+.booking-section p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-form label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.booking-form input {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+    background-color: rgba(49, 139, 224, 0.925);
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Added transition for smoother hover effect */
+}
+
+button[type="submit"]:hover {
+    background-color: rgba(49, 139, 224, 0.726);
+}
+
+.rating {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #666;
+}
+
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+    }
+
+    .tour-image, .booking-section {
+        flex: 1;
+    }
+
+    .tour-image img {
+        height: auto;
+    }
+
+    .booking-section {
+        padding: 40px;
+    }
+}
+
+
+.comments-section {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.comments-section h2{
+    font-size: 20px;
+    color: rgba(49, 139, 224, 0.726);
+}
+#commentInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#submitComment {
+    padding: 10px 20px;
+    background-color:rgba(49, 139, 224, 0.925);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#submitComment:hover {
+    background-color: #555;
+}
+
+.comment {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+#commentInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    font-size: 16px; /* Optional: Adjust font size */
+}
+nav{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+}
+nav .logo{
+    font-size: 30px;
+    font-family: sans-serif;
+    font-family: bold;
+    color: rgba(49, 139, 224, 0.925);
+    margin-left: 30px;
+    margin-bottom: 40px;
+}
+nav .back #back{
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: rgba(49, 139, 224, 0.925);
+    font-weight: bold;
+    font-family: sans-serif;
+    border-radius: 20px;
+
+}
